@@ -168,7 +168,11 @@ class App extends Component {
       axios.get('/todolist')
         .then(res => {
           localStorage.setItem('reactTodos', JSON.stringify(res.data));
+          this.setState({
+            todos:res.data,
+          });
       });
+      document.cookie.split(';')
     }else{
       const storeTodos = JSON.parse(localStorage.getItem('reactTodos'));
       this.setState({

@@ -3441,12 +3441,18 @@ var App = function (_Component4) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this6 = this;
+
       if (!localStorage.getItem('reactTodos')) {
         /* 检查本地localStorage存储 */
         //服务端获取初始化数据
         _axios2.default.get('/todolist').then(function (res) {
           localStorage.setItem('reactTodos', JSON.stringify(res.data));
+          _this6.setState({
+            todos: res.data
+          });
         });
+        document.cookie.split(';');
       } else {
         var storeTodos = JSON.parse(localStorage.getItem('reactTodos'));
         this.setState({
@@ -3457,7 +3463,7 @@ var App = function (_Component4) {
   }, {
     key: 'render',
     value: function render() {
-      var _this6 = this;
+      var _this7 = this;
 
       return _react2.default.createElement(
         'div',
@@ -3470,14 +3476,14 @@ var App = function (_Component4) {
             _reactRouterDom.Switch,
             null,
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render(props) {
-                return _react2.default.createElement(Todos, _extends({}, props, { todos: _this6.state.todos, classify: _this6.state.classify, handleTodoItem: _this6.handleTodoItem }));
+                return _react2.default.createElement(Todos, _extends({}, props, { todos: _this7.state.todos, classify: _this7.state.classify, handleTodoItem: _this7.handleTodoItem }));
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { path: '/todos', render: function render(props) {
-                return _react2.default.createElement(Todos, _extends({}, props, { todos: _this6.state.todos, classify: _this6.state.classify, handleTodoItem: _this6.handleTodoItem }));
+                return _react2.default.createElement(Todos, _extends({}, props, { todos: _this7.state.todos, classify: _this7.state.classify, handleTodoItem: _this7.handleTodoItem }));
               } }),
             _react2.default.createElement(_reactRouterDom.Route, { path: '/todoDetail', render: function render(props) {
-                return _react2.default.createElement(_TodoDetail2.default, _extends({}, props, { item: _this6.state.detailItem, handleDone: _this6.handleDone,
-                  handleUndo: _this6.handleUndo, handleDelete: _this6.handleDelete
+                return _react2.default.createElement(_TodoDetail2.default, _extends({}, props, { item: _this7.state.detailItem, handleDone: _this7.handleDone,
+                  handleUndo: _this7.handleUndo, handleDelete: _this7.handleDelete
                 }));
               } })
           )

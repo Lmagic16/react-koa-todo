@@ -1,6 +1,6 @@
-let TODOLIST = [
+let TODO_LIST = [
     {
-      id: '创1',
+      id: '1',
       name: '学习react',
       state: 'active',
       details: 'do todolist',
@@ -19,13 +19,13 @@ let TODOLIST = [
     },
     {
       id: '3',
-      name: '煮饭',
-      state: 'completed',
-      details: 'do todolist',
+      name: 'koa搭建',
+      state: 'active',
+      details: 'learn koa',
       createTime: '2017/12/10 上午09:21:08',
-      completedTime: '2017/12/11 上午09:50:13',
-      thought:'done well',
+      completedTime: '',
+      thought:'',
     }
   ]
 
-  export default TODOLIST;
+  export default TODO_LIST;
