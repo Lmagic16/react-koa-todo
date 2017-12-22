@@ -64,7 +64,7 @@ $npm start
 node工具，当文件修改保存时，自动重启node服务
 4. **babel相关模块**
 5. **webpack相关**
-webpack-dev-server 模块用于热加载。
+webpack-dev-middleware 和 webpack-hot-middleware
 6. **axio模块**
 - 用于ajax前后端数据交互[https://github.com/axios/axios](https://github.com/axios/axios)
 - cookie的设置和原理(github文章链接)

@@ -1,7 +1,8 @@
 import Koa from 'koa';
 import path from 'path';
 import Jade from 'koa-jade';
-import TODO_LIST from './todolistConfig';
+import TODO_LIST from './todolistInit';
+import fs from 'fs';
 /* import React from 'react'; */
 /* import { renderToString } from 'react-dom/server'; */
 /* import App from './component/App'; */
@@ -26,7 +27,6 @@ app.keys = ['todoNumber']; //设置密钥
 router.get('/todolist', function (ctx, next) {
   ctx.cookies.set('todoListNumber', TODO_NUMBER, { httpOnly: false })
   // console.log('body',ctx.header);
-  console.log(ctx.render);
   ctx.body = TODO_LIST;
 });
 
@@ -37,6 +37,7 @@ app
 // response
 app.use(async(ctx) => {
   //console.log('render',ctx.header);
+ // console.log(fs);
   await ctx.render('index', { react: '' });
 });
 
