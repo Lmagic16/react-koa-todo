@@ -3,18 +3,26 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    app: './src/client.js',
+    app: './src/client.tsx',
     vendor: ['react', 'react-dom']
   },
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'public')
   },
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' })
   ],
   module: {
     rules: [
+        { 
+            test: /\.tsx?$/,
+            loader: "awesome-typescript-loader"
+        },
         {
             test: /\.css$/,
             use: [

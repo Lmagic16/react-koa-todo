@@ -1,27 +1,47 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import './TodoDetail.css';
 
+type itemType = {
+  id: number;
+  name: string;
+  state: string;
+  details: string;
+  createTime: string;
+  completedTime: string;
+  thought: string;
+};
 
-class TodoDetail extends Component {
-  constructor() {
-    super();
+interface TodoDetailPropsType {
+  item: itemType;
+  handleDone: {(item: itemType, thought: string): void};
+  handleUndo: {(item: itemType): void};
+  handleDelete: {(item: itemType): void};
+}
+
+interface TodoDetailStateType {
+  thought: string;
+}
+
+class TodoDetail extends React.Component<TodoDetailPropsType, TodoDetailStateType> {
+  constructor(props: TodoDetailPropsType) {
+    super(props);
     this.state = {
-      thought:'',
-    }
+      thought: '',
+    };
     this.handleThoughtChange = this.handleThoughtChange.bind(this);
   }
-  handleDone(item,thought) {
-    this.props.handleDone(item,thought);
+  handleDone(item: itemType, thought: string) {
+    this.props.handleDone(item, thought);
   }
-  handleUndo(item) {
+  handleUndo(item: itemType) {
     this.props.handleUndo(item);
   }
-  handleThoughtChange(event) {
+  handleThoughtChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     this.setState({
       thought: event.target.value,
     });
   }
-  handleDelete(item) {
+  handleDelete(item: itemType) {
     this.props.handleDelete(item);
   }
   render() {
@@ -37,14 +57,14 @@ class TodoDetail extends Component {
           {item.details}
         </div>
         <div className="TodoDetail-state">
-          State: <span className="fa fa-clock-o" aria-hidden="true"></span>
+          State: <span className="fa fa-clock-o" aria-hidden="true"/>
         </div>
         <div className="TodoDetail-thought">
           <div>Thought: </div>
-          <textarea className="TodoDetail-textarea" type="text" value={this.state.thought} onChange={this.handleThoughtChange}></textarea>
+          <textarea className="TodoDetail-textarea" data-type="text" value={this.state.thought} onChange={this.handleThoughtChange}/>
         </div>
-        <button className="TodoDetail-done" onClick={this.handleDone.bind(this,item,this.state.thought)}>Done</button>
-        <button className="TodoDetail-delete" onClick={this.handleDelete.bind(this,item)}>Delete</button>
+        <button className="TodoDetail-done" onClick={this.handleDone.bind(this, item, this.state.thought)}>Done</button>
+        <button className="TodoDetail-delete" onClick={this.handleDelete.bind(this, item)}>Delete</button>
       </div>
     );
     const completedItem = (
@@ -58,7 +78,7 @@ class TodoDetail extends Component {
           {item.details}
         </div>
         <div className="TodoDetail-state">
-          State: <span className="fa fa-check-square-o" aria-hidden="true"></span>
+          State: <span className="fa fa-check-square-o" aria-hidden="true"/>
         </div>
         <div className="TodoDetail-thought">
           <span>Thought: </span>
@@ -68,11 +88,11 @@ class TodoDetail extends Component {
           <span>Completed Time: </span>
           <span className="TodoDetail-completedTimeText">{item.completedTime}</span>
         </div>
-        <button className="TodoDetail-done" onClick={this.handleUndo.bind(this,item)}>Undo</button>
-        <button className="TodoDetail-delete" onClick={this.handleDelete.bind(this,item)}>Delete</button>
+        <button className="TodoDetail-done" onClick={this.handleUndo.bind(this, item)}>Undo</button>
+        <button className="TodoDetail-delete" onClick={this.handleDelete.bind(this, item)}>Delete</button>
       </div>
     );
-    if(item.state === 'completed') {
+    if (item.state === 'completed') {
       return completedItem;
     }
     return activeItem;

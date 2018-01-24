@@ -1,6 +1,6 @@
 let TODO_LIST = [
     {
-      id: '1',
+      id: 1,
       name: '学习react',
       state: 'active',
       details: 'do todolist',
@@ -9,7 +9,7 @@ let TODO_LIST = [
       thought:'',
     },
     {
-      id: '2',
+      id: 2,
       name: '洗衣服',
       state: 'active',
       details: 'own things',
@@ -18,7 +18,7 @@ let TODO_LIST = [
       thought:'',
     },
     {
-      id: '3',
+      id: 3,
       name: 'koa搭建',
       state: 'active',
       details: 'learn koa',

@@ -1,7 +1,8 @@
-## React+koa项目-todolist
+## TypeScript+React+koa项目-todolist
 ### 所用技术
 前端框架：React  
-后端框架：koa@V2    
+后端框架：koa@V2   
+语言：TypeScript + JavaScript 
 前端路由：react-router@V4   
 后端路由：koa-router  
 打包工具：webpack  
@@ -14,24 +15,25 @@
 ├── index.js     //服务器入口文件，会加载server.js
 ├── package-lock.json
 ├── package.json   //整个项目的依赖和配置
+├── tsconfig.json   //ts编译配置文件
+├── tslint.json
 ├── public       //存放构建产物
 ├── src
 │   ├── client.css
-│   ├── client.js              //客户端入口文件
+│   ├── client.tsx              //客户端入口文件
 │   ├── component             //react组件
 │   │   ├── AddTodo.css
-│   │   ├── AddTodo.js
+│   │   ├── AddTodo.tsx
 │   │   ├── App.css
-│   │   ├── App.js
+│   │   ├── App.tsx
 │   │   ├── TodoDetail.css
-│   │   └── TodoDetail.js
-│   ├── server.js            //服务端koa主体文件，这里接受、处理http请求，返回页面
-│   └── todolistConfig.js   //初始化静态文件，初次访问服务器时返回
+│   │   └── TodoDetail.tsx
+│   ├── server.js              //服务端koa主体文件，这里接受、处理http请求，返回页面
+│   └── todolistConfig.js     //初始化静态文件，初次访问服务器时返回
 ├── views
-│   └── index.jade         //koa-jade模板文件
-└── webpack.config.js      //webpack配置文件
+│   └── index.jade           //koa-jade模板文件
+└── webpack.config.js       //webpack配置文件
 
-4 directories, 23 files
 ```
 ### overview
 如同react-todolist项目[https://github.com/Lmagic16/react-todos](https://github.com/Lmagic16/react-todos)
@@ -45,7 +47,7 @@ $npm install
 $npm run build
 
 ### 3.运行
-$npm start  
+$npm start    
 
 运行之后，访问 http://localhost:3000/ 即可
 
@@ -70,9 +72,18 @@ webpack-dev-middleware 和 webpack-hot-middleware
 - cookie的设置和原理(github文章链接)
 
 
-### 新问题
-- 开发效率（每次都需要重新打包运行才能看到修改结果）
-- 解决办法（引入webpack的hot-reloader）
+### 在react中使用typescript
+手动配置，[https://www.tslang.cn/docs/handbook/react-&-webpack.html](https://www.tslang.cn/docs/handbook/react-&-webpack.html)
+
+- 安装声明文件依赖：`npm install --save react react-dom @types/react @types/react-dom`，使用@types/前缀表示我们额外要获取React和React-DOM的声明文件。
+- 安装ts loader：`npm install --save-dev typescript awesome-typescript-loader`，awesome-typescript-loader可以让Webpack使用TypeScript的标准配置文件 tsconfig.json编译TypeScript代码。
+- webpack.config.js文件中需加上awesome-typescript-loader的配置 和entry文件(tsx文件)，以及resolve解析配置
+<pre>
+resolve: {
+        // Add '.ts' and '.tsx' as resolvable extensions.
+        extensions: [".ts", ".tsx", ".js", ".json"]
+    },
+</pre>
 
 
 ### 注意项
